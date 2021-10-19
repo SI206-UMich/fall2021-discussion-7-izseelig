@@ -33,7 +33,12 @@ def find_word(string_list):
     # loop through the found words and add the words to your empty list 
 
     #return the list of all words that start with the letter B, E, or T
-    pass
+    final_list = []
+    regex_ex = r"\b([A-Za-z]+)\d{3}([A-Za-z]+)"
+    for line in string_list:
+        found = re.finall(regex_ex, line)
+        for word in found:
+            final_list.append(word)
 
 
 def find_days(string_list):
@@ -50,7 +55,13 @@ def find_days(string_list):
     # loop through the found dates and only add the days to your empty list 
     
     #return the list of days
-    pass
+    days_list = []
+    regex_ex = r"(\b\d{1,2}[\/](\d{1,2})[\/](\d{4})\b"
+    for line in string_list:
+        found = re.finall(regex_ex, line)
+        for date in found:
+            days_list.append(date[1])
+    return days_list
 
 def find_domains(string_list):
     """ Return a list of web address domains from the list of strings the domains of a wbsite are after www. """
@@ -71,7 +82,16 @@ def find_domains(string_list):
     # add the domains to your empty list
     
     #return the list of domains
-    pass
+    domain_list = []
+    regex_ex = r"https?://[\w.]+"
+    for line in string_list:
+        found = re.finall(regex_ex, line)
+        for website in found:
+            domain = website.split("//")[1].strip('www.')
+            domain_list.append(domain)
+    return domain_list
+
+
 
 class TestAllMethods(unittest.TestCase):
 
